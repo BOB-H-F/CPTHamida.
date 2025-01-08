@@ -1,12 +1,20 @@
 /** start code */
+import arc.*;
 
-import arc.*; 
+public class CPTHamida {
+    public static void main(String[] args) {
+        Console con = new Console();
 
-public class CPTHamida{
-	public static void main(String[] args ){
-		Console con = new Console();
-		
-		con.print("coding this ");
-		con.println("hello");
-	}
+        // Variables
+        String StrWhere;
+
+        /** Front interface */
+        con.println("To exit press E:");
+        StrWhere = con.readLine();
+
+        // Test 
+        if (StrWhere.equals("E")) {
+            con.closeConsole(); // Close the console
+        }
+    }
 }
