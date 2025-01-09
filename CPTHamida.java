@@ -1,4 +1,3 @@
-/** start code */
 import arc.*;
 
 public class CPTHamida {
@@ -9,12 +8,10 @@ public class CPTHamida {
         String StrWhere;
 
         /** Front interface */
+        con.print("Which command would you like to proceed with? ");
         con.println("To exit press E:");
         StrWhere = con.readLine();
 
-        // Test 
-        if (StrWhere.equals("E")) {
-            con.closeConsole(); // Close the console
-        }
+        CPTmethods.StrPage(StrWhere, con);
     }
 }
