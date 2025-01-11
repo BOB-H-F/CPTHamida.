@@ -20,8 +20,9 @@ public class CPTHamida {
         
         // Variables
         String strLogInName;
-      
-        
+		double dblMark; 
+		double dbBlcasicMath;
+		double dblCount;
         //play screen login: 
        if (StrWhere.equals("P")){
 		 con.println("Login");
@@ -29,7 +30,12 @@ public class CPTHamida {
 		
 		con.print("Enter Name: ");
 		strLogInName = con.readLine();
+		
+		for dblCount
+		con.println("");
+		
 		Score.close();
+		
 		
 
 	  }
