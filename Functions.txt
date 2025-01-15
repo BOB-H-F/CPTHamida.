@@ -1,0 +1,44 @@
+2 ^ 3
+8
+8.0
+eight
+10 ^ 2
+100
+100.0
+one hundred
+3 ^ 4
+81
+81.0
+eighty-one
+5 ^ 3
+125
+125.0
+one hundred twenty-five
+6 ^ 2
+36
+36.0
+thirty-six
+7 ^ 3
+343
+343.0
+three hundred forty-three
+8 ^ 2
+64
+64.0
+sixty-four
+4 ^ 5
+1024
+1024.0
+one thousand twenty-four
+9 ^ 2
+81
+81.0
+eighty-one
+11 ^ 2
+121
+121.0
+one hundred twenty-one
+12 ^ 2
+144
+144.0
+one hundred forty-four
