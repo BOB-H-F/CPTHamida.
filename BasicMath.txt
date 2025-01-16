@@ -1,0 +1,45 @@
+2 ^ 3
+8
+8.0
+eight
+10 * 2
+20
+20.0
+twenty
+3 ^ 4
+81
+81.0
+eighty-one
+5 + 3
+8
+8.0
+eight
+6 ^ 2
+36
+36.0
+thirty six
+6 / 2
+3
+3.0
+three
+5 + 2 * 3(10+5)
+95
+95.0
+ninety five
+5(8*6)^2
+980
+980.0
+nine hunderd eighty
+1 + 1 
+2
+2.0
+two
+1 * 2 
+2
+2.0
+two
+12 ^ 2
+144
+144.0
+one hundred forty four
+
