@@ -27,7 +27,7 @@ public class CPTHamida {
                 // Check for the "S" command here to show the score
                 if (StrWhere.equalsIgnoreCase("S")) {
                     con.clear();
-                    con.println(strLogInName + " final score: " + intscore);
+                    con.println(strLogInName + " final score: " + intscore);  // Show the in-memory score
                     con.print("Press H to go back to the home screen: ");
                     StrWhere = con.readLine();
                     if (StrWhere.equalsIgnoreCase("H")) {
@@ -41,23 +41,18 @@ public class CPTHamida {
 
             // Play screen logic (when "P" is chosen)
             if (StrWhere.equalsIgnoreCase("P")) {
-				con.clear();
-				
-				
-				TextOutputFile Score = new TextOutputFile("Score.txt", true);
+                con.clear();
+                
                 con.println("Login");
 
                 // Ask for username
-                
-                if (strLogInName.equalsIgnoreCase(" ")) {
-					con.print("Enter Name: ");
-					strLogInName = con.readLine();
-					
-					strLogInName = con.readLine();
-					Score.println(strLogInName);
-					
-			}  
+                if (strLogInName.equalsIgnoreCase("")) {
+                    con.print("Enter Name: ");
+                    strLogInName = con.readLine();
 
+                    // Check if the name is already in the file and load the current score
+                    intscore = checkAndLoadScore("Score.txt", strLogInName);
+                }
 
                 con.clear();
 
@@ -70,7 +65,7 @@ public class CPTHamida {
                 StrWhere = con.readLine();
 
                 if (StrWhere.equalsIgnoreCase("B")) {
-					con.clear();
+                    con.clear();
                     // Get the number of questions from the BasicMath.txt file
                     intNOBMQ = CPTmethods.countQuestionsInFile("BasicMath.txt");
 
@@ -123,14 +118,16 @@ public class CPTHamida {
                         // Check if the answer is correct
                         if (userAnswer.equals(BM[i][3]) || userAnswer.equals(BM[i][1]) || userAnswer.equals(BM[i][2])) {
                             con.println("Correct!");
-                            intscore = intscore + 1 ;  // Increase score
+                            intscore = intscore + 1;  // Increase score in memory
                         } else {
                             con.println("Incorrect :<");
                         }
                     }
 
+                    // After the test, save the updated score
+                    updateScore("Score.txt", strLogInName, intscore);
+
                     con.println(strLogInName + " final score: " + intscore);
-                    
 
                     // After the test, return to the home screen
                     con.println("Press H to go back to the home screen");
@@ -139,8 +136,74 @@ public class CPTHamida {
                         continue;  // Go back to the home screen
                     }
                 }
-                
             }
         }
+    }
+
+    // Method to check if name exists and load the score from file
+    public static int checkAndLoadScore(String fileName, String playerName) {
+        boolean nameExists = false;
+        String strAllNam;
+        int score = 0;
+
+        // Open the file to read names and scores
+        TextInputFile scoreFile = new TextInputFile(fileName);
+
+        // Read all existing names and check for duplication
+        while ((strAllNam = scoreFile.readLine()) != null) {
+            if (strAllNam.equalsIgnoreCase(playerName)) {
+                // Name found, read the score
+                score = Integer.parseInt(scoreFile.readLine());
+                nameExists = true;
+                break; // Stop reading if the name is found
+            }
+        }
+        scoreFile.close(); // Close after reading
+
+        // If the name doesn't exist, add it with a score of 0
+        if (!nameExists) {
+            TextOutputFile outputFile = new TextOutputFile(fileName, true);
+            outputFile.println(playerName); // Add the name
+            outputFile.println(0); // Add initial score as 0
+            outputFile.close();
+        }
+
+        return score;  // Return the score
+    }
+
+    // Method to update the score for the user in the file
+    public static void updateScore(String fileName, String playerName, int newScore) {
+        TextInputFile scoreFile = new TextInputFile(fileName);
+        TextOutputFile tempFile = new TextOutputFile("temp.txt"); // Temporary file to rewrite
+
+        boolean playerFound = false;
+        String line;
+
+        // Read the original file and write to the temp file
+        while ((line = scoreFile.readLine()) != null) {
+            tempFile.println(line);  // Write the line as-is
+            if (line.equalsIgnoreCase(playerName)) {
+                playerFound = true;
+                tempFile.println(newScore);  // Write the updated score
+                scoreFile.readLine();  // Skip the old score
+            }
+        }
+
+        // Close files
+        scoreFile.close();
+        tempFile.close();
+
+        // Replace the old file with the new temp file
+        TextInputFile tempInput = new TextInputFile("temp.txt");
+        TextOutputFile originalFile = new TextOutputFile(fileName, false);  // Overwrite the original file
+
+        // Copy everything from the temp file back to the original file
+        while ((line = tempInput.readLine()) != null) {
+            originalFile.println(line);
+        }
+
+        // Close files
+        tempInput.close();
+        originalFile.close();
     }
 }
