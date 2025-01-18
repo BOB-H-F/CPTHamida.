@@ -6,7 +6,7 @@ public class CPTHamida {
         Console con = new Console();
 
         // Variables for All
-        String StrWhere = "H";   // Home screen
+        String StrWhere = "H";   
         String strLogInName = "";
         int intscore = 0;  // Initialize score
         int intNOBMQ = 0;  // Initialize number of questions in Basic Math
@@ -23,6 +23,8 @@ public class CPTHamida {
                 con.println("To see score press S");
                 con.print("Which command would you like to proceed with?: ");
                 StrWhere = con.readLine();
+                 
+                CPTmethods.strtryAgin(StrWhere,StrWhere,con);
 
                 // Check for the "S" command here to show the score
                 if (StrWhere.equalsIgnoreCase("S")) {
