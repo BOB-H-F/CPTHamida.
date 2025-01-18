@@ -14,7 +14,7 @@ public class CPTmethods {
             file.readLine();  // Answer 
             file.readLine();  // Answer 
             file.readLine();  // Answer 
-            
+
             questionCount++;  // Increment the question count
         }
 
@@ -22,6 +22,7 @@ public class CPTmethods {
         return questionCount;  // Return the total number of questions
     }
 
+    // Method for string-based screen operations
     public static void StrScreen(String Strwhere, Console con) {
         if (Strwhere.equalsIgnoreCase("E")) {
             con.closeConsole(); // Close the console
@@ -31,35 +32,50 @@ public class CPTmethods {
         }
     }
 
-    // Modified strtryAgin method to update Strwhere and handle already on the same screen case
-   public static String strtryAgin(String Strwhere, String StrUPWhere, Console con) {
-        String userInput = "";  // To store user input
+    // Method to read scores, sort them using bubble sort, and print names with scores
+    // Adds numbers beside each entry and marks the logged-in user with "(you)"
+    public static void Intleaderbord(Console con, String loggedInUser) {
+        TextInputFile scoreFile = new TextInputFile("Score.txt");  // Assuming "Score.txt" contains names and scores
+        String[] names = new String[100];  // Array to store names (adjust size as needed)
+        int[] scores = new int[100];       // Array to store scores
+        int count = 0;                     // Counter to keep track of how many records we have
 
-        while (true) {
-            // Update StrUPWhere with the current Strwhere
-            StrUPWhere = Strwhere;
+        // First loop to read names and scores from the file
+        String name;
+        while ((name = scoreFile.readLine()) != null) {
+            int score = Integer.parseInt(scoreFile.readLine());
+            names[count] = name;
+            scores[count] = score;
+            count++;
+        }
+        scoreFile.close();
 
-            // Check if they are trying to go to the same screen
-            if (userInput.equalsIgnoreCase(StrUPWhere)) {
-                con.print("You're already here. Try a different command: ");
-                userInput = con.readLine();  // Read input from the user
-            } else {
-                // If the input is invalid, prompt again
-                if (!userInput.equalsIgnoreCase("H") && !userInput.equalsIgnoreCase("P") &&
-                    !userInput.equalsIgnoreCase("E") && !userInput.equalsIgnoreCase("S") &&
-                    !userInput.equalsIgnoreCase("B")) {
-                    
-                    con.print("Ummm... idk what that is, try again: ");
-                    userInput = con.readLine();  // Read new input
-                } else {
-                    // If a valid and different input is entered, update Strwhere
-                    Strwhere = userInput;
-                    StrUPWhere = Strwhere;  
-                    break;  // Exit the loop if valid and different input is provided
+        // Bubble sort to sort the scores in descending order, adjusting names accordingly
+        for (int i = 0; i < count - 1; i++) {
+            for (int j = 0; j < count - i - 1; j++) {
+                if (scores[j] < scores[j + 1]) {
+                    // Swap the scores
+                    int tempScore = scores[j];
+                    scores[j] = scores[j + 1];
+                    scores[j + 1] = tempScore;
+
+                    // Swap the corresponding names
+                    String tempName = names[j];
+                    names[j] = names[j + 1];
+                    names[j + 1] = tempName;
                 }
             }
         }
 
-        return Strwhere;  // Return the updated Strwhere
+        // Second loop to print the sorted names and scores
+        for (int i = 0; i < count; i++) {
+            String displayName = names[i];
+            // If the current name matches the logged-in user, add "(you)"
+            if (names[i].equalsIgnoreCase(loggedInUser)) {
+                displayName += " (you)";
+            }
+            // Print the ranking number, name, and score
+            con.println((i + 1) + ". " + displayName + " - " + scores[i]);
+        }
     }
 }

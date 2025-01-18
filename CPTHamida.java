@@ -8,8 +8,8 @@ public class CPTHamida {
         // Variables for All
         String StrWhere = "H";   
         String strLogInName = "";
-        int intscore = 0;  // Initialize score
-        int intNOBMQ = 0;  // Initialize number of questions in Basic Math
+        int intscore = 0;  //  score
+        int intNOBMQ = 0;  // the number of questions in Basic Math
 
         // Arrays for questions and answers (5th column for random number)
         String BM[][] = new String[intNOBMQ = CPTmethods.countQuestionsInFile("BasicMath.txt")][5];  // Add 5th column for random number
@@ -24,12 +24,12 @@ public class CPTHamida {
                 con.print("Which command would you like to proceed with?: ");
                 StrWhere = con.readLine();
                  
-                CPTmethods.strtryAgin(StrWhere,StrWhere,con);
+                
 
                 // Check for the "S" command here to show the score
                 if (StrWhere.equalsIgnoreCase("S")) {
                     con.clear();
-                    con.println(strLogInName + " final score: " + intscore);  // Show the in-memory score
+                    CPTmethods.Intleaderbord(con, strLogInName); //the leaderbord 
                     con.print("Press H to go back to the home screen: ");
                     StrWhere = con.readLine();
                     if (StrWhere.equalsIgnoreCase("H")) {
