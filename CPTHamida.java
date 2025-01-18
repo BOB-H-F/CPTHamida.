@@ -8,11 +8,15 @@ public class CPTHamida {
         // Variables for All
         String StrWhere = "H";   
         String strLogInName = "";
-        int intscore = 0;  //  score
+        int intscore = 0;  // score
         int intNOBMQ = 0;  // the number of questions in Basic Math
+        int intNOALQ = 0;  // the number of questions in Algebra (Level 2)
+        int intNOFLQ = 0;  // the number of questions in Functions (Level 3)
 
         // Arrays for questions and answers (5th column for random number)
         String BM[][] = new String[intNOBMQ = CPTmethods.countQuestionsInFile("BasicMath.txt")][5];  // Add 5th column for random number
+        String AL[][] = new String[intNOALQ = CPTmethods.countQuestionsInFile("Algebra.txt")][5];  // Add 5th column for random number for Algebra
+        String FL[][] = new String[intNOFLQ = CPTmethods.countQuestionsInFile("Functions.txt")][5];  // Add 5th column for random number for Functions
 
         while (true) {
             if (StrWhere.equalsIgnoreCase("H")) {
@@ -23,13 +27,11 @@ public class CPTHamida {
                 con.println("To see score press S");
                 con.print("Which command would you like to proceed with?: ");
                 StrWhere = con.readLine();
-                 
                 
-
                 // Check for the "S" command here to show the score
                 if (StrWhere.equalsIgnoreCase("S")) {
                     con.clear();
-                    CPTmethods.Intleaderbord(con, strLogInName); //the leaderbord 
+                    CPTmethods.Intleaderbord(con, strLogInName); //the leaderboard 
                     con.print("Press H to go back to the home screen: ");
                     StrWhere = con.readLine();
                     if (StrWhere.equalsIgnoreCase("H")) {
@@ -59,13 +61,16 @@ public class CPTHamida {
                 con.clear();
 
                 // The Test Options
+                con.println("The level you're in is the number of points you will get per question ");
+                con.println(" ");
                 con.println("(LEVEL 1 test) for Basic Math press B ");
                 con.println("(LEVEL 2 test) for Basic Algebra press A");
                 con.println("(LEVEL 3 test) for the test Functions F");
 
                 con.print("Which test would you like to take?: ");
                 StrWhere = con.readLine();
-
+                
+                // Level 1: Basic Math (existing)
                 if (StrWhere.equalsIgnoreCase("B")) {
                     con.clear();
                     // Get the number of questions from the BasicMath.txt file
@@ -121,6 +126,154 @@ public class CPTHamida {
                         if (userAnswer.equals(BM[i][3]) || userAnswer.equals(BM[i][1]) || userAnswer.equals(BM[i][2])) {
                             con.println("Correct!");
                             intscore = intscore + 1;  // Increase score in memory
+                        } else {
+                            con.println("Incorrect :<");
+                        }
+                    }
+
+                    // After the test, save the updated score
+                    updateScore("Score.txt", strLogInName, intscore);
+
+                    con.println(strLogInName + " final score: " + intscore);
+
+                    // After the test, return to the home screen
+                    con.println("Press H to go back to the home screen");
+                    StrWhere = con.readLine();
+                    if (StrWhere.equalsIgnoreCase("H")) {
+                        continue;  // Go back to the home screen
+                    }
+                }
+
+                // Level 2: Basic Algebra (new part)
+                if (StrWhere.equalsIgnoreCase("A")) {
+                    con.clear();
+                    // Get the number of questions from the Algebra.txt file
+                    intNOALQ = CPTmethods.countQuestionsInFile("Algebra.txt");
+
+                    // Reopen the file to read the questions again
+                    TextInputFile Algebra = new TextInputFile("Algebra.txt");
+
+                    // Initialize the array for Algebra with the correct number of rows based on intNOALQ
+                    AL = new String[intNOALQ][5];  // Add a 5th column for the random number
+
+                    Random rand = new Random();  // Random number generator
+
+                    // Now populate the array with the questions and answers
+                    int row = 0;
+                    while (!Algebra.eof()) {
+                        String StrQeshtion = Algebra.readLine();
+                        String intAnw = Algebra.readLine();
+                        String dblAnw = Algebra.readLine();
+                        String StrAnw = Algebra.readLine();
+
+                        // Store the question and answers in the array
+                        AL[row][0] = StrQeshtion;  // Question
+                        AL[row][1] = intAnw;       // Answer 
+                        AL[row][2] = dblAnw;       // Answer 
+                        AL[row][3] = StrAnw;       // Answer
+                        AL[row][4] = Integer.toString(rand.nextInt(1000)); // Store random number in 5th column
+
+                        row++;
+                    }
+
+                    Algebra.close();  // Close the file after reading
+
+                    // Shuffle the questions based on the random number in the 5th column
+                    for (int i = 0; i < intNOALQ; i++) {
+                        for (int j = i + 1; j < intNOALQ; j++) {
+                            if (Integer.parseInt(AL[i][4]) > Integer.parseInt(AL[j][4])) {
+                                // Swap the rows
+                                String[] temp = AL[i];
+                                AL[i] = AL[j];
+                                AL[j] = temp;
+                            }
+                        }
+                    }
+
+                    // Asking questions in the shuffled order
+                    for (int i = 0; i < intNOALQ; i++) {  // Use intNOALQ here
+                        con.println("Question: " + AL[i][0]);
+                        con.print("Your answer: ");
+                        String userAnswer = con.readLine();
+
+                        // Check if the answer is correct
+                        if (userAnswer.equals(AL[i][3]) || userAnswer.equals(AL[i][1]) || userAnswer.equals(AL[i][2])) {
+                            con.println("Correct!");
+                            intscore = intscore + 2;  // Increase score in memory
+                        } else {
+                            con.println("Incorrect :<");
+                        }
+                    }
+
+                    // After the test, save the updated score
+                    updateScore("Score.txt", strLogInName, intscore);
+
+                    con.println(strLogInName + " final score: " + intscore);
+
+                    // After the test, return to the home screen
+                    con.println("Press H to go back to the home screen");
+                    StrWhere = con.readLine();
+                    if (StrWhere.equalsIgnoreCase("H")) {
+                        continue;  // Go back to the home screen
+                    }
+                }
+
+                // Level 3: Functions (new part with 3 points per correct answer)
+                if (StrWhere.equalsIgnoreCase("F")) {
+                    con.clear();
+                    // Get the number of questions from the Functions.txt file
+                    intNOFLQ = CPTmethods.countQuestionsInFile("Functions.txt");
+
+                    // Reopen the file to read the questions again
+                    TextInputFile Functions = new TextInputFile("Functions.txt");
+
+                    // Initialize the array for Functions with the correct number of rows based on intNOFLQ
+                    FL = new String[intNOFLQ][5];  // Add a 5th column for the random number
+
+                    Random rand = new Random();  // Random number generator
+
+                    // Now populate the array with the questions and answers
+                    int row = 0;
+                    while (!Functions.eof()) {
+                        String StrQeshtion = Functions.readLine();
+                        String intAnw = Functions.readLine();
+                        String dblAnw = Functions.readLine();
+                        String StrAnw = Functions.readLine();
+
+                        // Store the question and answers in the array
+                        FL[row][0] = StrQeshtion;  // Question
+                        FL[row][1] = intAnw;       // Answer 
+                        FL[row][2] = dblAnw;       // Answer 
+                        FL[row][3] = StrAnw;       // Answer
+                        FL[row][4] = Integer.toString(rand.nextInt(1000)); // Store random number in 5th column
+
+                        row++;
+                    }
+
+                    Functions.close();  // Close the file after reading
+
+                    // Shuffle the questions based on the random number in the 5th column
+                    for (int i = 0; i < intNOFLQ; i++) {
+                        for (int j = i + 1; j < intNOFLQ; j++) {
+                            if (Integer.parseInt(FL[i][4]) > Integer.parseInt(FL[j][4])) {
+                                // Swap the rows
+                                String[] temp = FL[i];
+                                FL[i] = FL[j];
+                                FL[j] = temp;
+                            }
+                        }
+                    }
+
+                    // Asking questions in the shuffled order
+                    for (int i = 0; i < intNOFLQ; i++) {  // Use intNOFLQ here
+                        con.println("Question: " + FL[i][0]);
+                        con.print("Your answer: ");
+                        String userAnswer = con.readLine();
+
+                        // Check if the answer is correct
+                        if (userAnswer.equals(FL[i][3]) || userAnswer.equals(FL[i][1]) || userAnswer.equals(FL[i][2])) {
+                            con.println("Correct!");
+                            intscore = intscore + 3;  // Increase score by 3 for each correct answer
                         } else {
                             con.println("Incorrect :<");
                         }

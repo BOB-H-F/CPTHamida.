@@ -1,1 +1,80 @@
+f(x) = x + 2, find f(x) = 5
+3
+3.0
+three
+f(x) = 3x, find f(x) = 12
+4
+4.0
+four
+f(x) = x - 4, find f(x) = 6
+10
+10.0
+ten
+f(x) = x * 4, find f(x) = 20
+5
+5.0
+five
+f(x) = x / 2, find f(x) = 7
+14
+14.0
+fourteen
+f(x) = 2x + 1, find f(x) = 9
+4
+4.0
+four
+f(x) = x - 5, find f(x) = 8
+13
+13.0
+thirteen
+f(x) = 5x, find f(x) = 30
+6
+6.0
+six
 
+f(x) = 3x - 2, find f(x) = 7
+3
+3.0
+three
+
+f(x) = x + 8, find f(x) = 15
+7
+7.0
+seven
+
+f(x) = x * 2 - 3, find f(x) = 7
+5
+5.0
+five
+
+f(x) = x / 3 + 1, find f(x) = 5
+12
+12.0
+twelve
+f(x) = 4x - 5, find f(x) = 11
+4
+4.0
+four
+f(x) = x + 10, find f(x) = 20
+10
+10.0
+ten
+f(x) = 6x, find f(x) = 24
+4
+4.0
+four
+f(x) = 2x - 1, find f(x) = 9
+5
+5.0
+five
+f(x) = 3x + 5, find f(x) = 20
+5
+5.0
+five
+f(x) = x / 4 + 2, find f(x) = 7
+20
+20.0
+twenty
+f(x) = x - 3, find f(x) = 12
+15
+15.0
+fifteen
