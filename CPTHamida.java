@@ -104,6 +104,8 @@ public class CPTHamida {
 
                     BasicMath.close();  // Close the file after reading
 
+							// varuble 
+							int intBTestscore = 0;
                     // Shuffle the questions based on the random number in the 5th column
                     for (int i = 0; i < intNOBMQ; i++) {
                         for (int j = i + 1; j < intNOBMQ; j++) {
@@ -121,11 +123,13 @@ public class CPTHamida {
                         con.println("Question: " + BM[i][0]);
                         con.print("Your answer: ");
                         String userAnswer = con.readLine();
+                        
 
                         // Check if the answer is correct
                         if (userAnswer.equals(BM[i][3]) || userAnswer.equals(BM[i][1]) || userAnswer.equals(BM[i][2])) {
                             con.println("Correct!");
                             intscore = intscore + 1;  // Increase score in memory
+                            intBTestscore = intBTestscore + 1;
                         } else {
                             con.println("Incorrect :<");
                         }
@@ -134,6 +138,7 @@ public class CPTHamida {
                     // After the test, save the updated score
                     updateScore("Score.txt", strLogInName, intscore);
 
+					con.println(strLogInName + " for this test your score is " + intBTestscore);
                     con.println(strLogInName + " final score: " + intscore);
 
                     // After the test, return to the home screen
@@ -189,17 +194,21 @@ public class CPTHamida {
                             }
                         }
                     }
-
+							// varuble 
+							int intATestscore = 0;
+							
                     // Asking questions in the shuffled order
                     for (int i = 0; i < intNOALQ; i++) {  // Use intNOALQ here
                         con.println("Question: " + AL[i][0]);
                         con.print("Your answer: ");
                         String userAnswer = con.readLine();
-
+							
+							
                         // Check if the answer is correct
                         if (userAnswer.equals(AL[i][3]) || userAnswer.equals(AL[i][1]) || userAnswer.equals(AL[i][2])) {
                             con.println("Correct!");
                             intscore = intscore + 2;  // Increase score in memory
+                            intATestscore = intATestscore + 2;
                         } else {
                             con.println("Incorrect :<");
                         }
@@ -207,7 +216,8 @@ public class CPTHamida {
 
                     // After the test, save the updated score
                     updateScore("Score.txt", strLogInName, intscore);
-
+                    
+                    con.println(strLogInName + " for this test your score is " + intATestscore);
                     con.println(strLogInName + " final score: " + intscore);
 
                     // After the test, return to the home screen
@@ -252,6 +262,9 @@ public class CPTHamida {
 
                     Functions.close();  // Close the file after reading
 
+							// varuble 
+							int intFTestscore = 0;
+							
                     // Shuffle the questions based on the random number in the 5th column
                     for (int i = 0; i < intNOFLQ; i++) {
                         for (int j = i + 1; j < intNOFLQ; j++) {
@@ -273,7 +286,9 @@ public class CPTHamida {
                         // Check if the answer is correct
                         if (userAnswer.equals(FL[i][3]) || userAnswer.equals(FL[i][1]) || userAnswer.equals(FL[i][2])) {
                             con.println("Correct!");
-                            intscore = intscore + 3;  // Increase score by 3 for each correct answer
+                            intscore = intscore + 3;  
+                            intFTestscore = intFTestscore + 3;
+                            
                         } else {
                             con.println("Incorrect :<");
                         }
@@ -282,6 +297,7 @@ public class CPTHamida {
                     // After the test, save the updated score
                     updateScore("Score.txt", strLogInName, intscore);
 
+					con.println(strLogInName + " for this test your score is " + intFTestscore);
                     con.println(strLogInName + " final score: " + intscore);
 
                     // After the test, return to the home screen
