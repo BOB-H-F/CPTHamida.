@@ -303,8 +303,7 @@ public class CPTHamida {
 
                     // Asking questions in the shuffled order
                     for (int i = 0; i < intNOFLQ; i++) {  // Use intNOFLQ here
-						con.clear();
-						con.println(strLogInName + " score: " + intFTestscore);
+						
                         con.println("Question: " + FL[i][0]);
                         con.print("Your answer: ");
                         String userAnswer = con.readLine();

@@ -1,4 +1,5 @@
 import arc.*;
+import java.awt.*;
 
 public class CPTmethods {
 
@@ -30,6 +31,13 @@ public class CPTmethods {
             con.clear();
             // Additional logic for 'P' can be added here
         }
+    }
+
+    // Method to print "(you)" in red and reset text color to black after
+    public static void printYouInRed(Console con) {
+        con.setTextColor(Color.RED);   // Set text color to red
+        con.print(" (you)");           // Print "(you)"
+        con.setTextColor(Color.BLACK); // Reset text color to black for the rest of the text
     }
 
     // Method to read scores, sort them using bubble sort, and print names with scores
@@ -69,14 +77,19 @@ public class CPTmethods {
 
         // Second loop to print the sorted names and scores
         for (int i = 0; i < count; i++) {
-            String displayName = names[i];
-            // If the current name matches the logged-in user, add "(you)"
+            // Print the ranking number
+            con.print("top " + (i + 1) + ". ");
+            
+            // Print the name
+            con.print(names[i]);
+
+            // If the current name matches the logged-in user, print "(you)" in red
             if (names[i].equalsIgnoreCase(loggedInUser)) {
-                displayName += " (you)";
-                
+                printYouInRed(con);
             }
-            // Print the ranking number, name, and score
-            con.println("top "+(i + 1) + ". " + displayName + " with: " + scores[i]);
+
+            // Print the score
+            con.println(" with: " + scores[i]);
         }
     }
 }
