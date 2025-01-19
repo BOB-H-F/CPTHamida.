@@ -1,5 +1,10 @@
+/**satrt code */
 import arc.*;
 import java.util.Random;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.awt.Graphics;
+import java.awt.Color;
 
 public class CPTHamida {
     public static void main(String[] args) {
@@ -17,6 +22,21 @@ public class CPTHamida {
         String BM[][] = new String[intNOBMQ = CPTmethods.countQuestionsInFile("BasicMath.txt")][5];  // Add 5th column for random number
         String AL[][] = new String[intNOALQ = CPTmethods.countQuestionsInFile("Algebra.txt")][5];  // Add 5th column for random number for Algebra
         String FL[][] = new String[intNOFLQ = CPTmethods.countQuestionsInFile("Functions.txt")][5];  // Add 5th column for random number for Functions
+
+/**sound */
+        // Sound file path
+        File file = new File("SoundSquidGame.wav.wav");
+
+        // Try to load and play sound
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            con.println("Error playing sound: " + e.getMessage());
+        }
+
 
         while (true) {
             if (StrWhere.equalsIgnoreCase("H")) {
@@ -120,6 +140,8 @@ public class CPTHamida {
 
                     // Asking questions in the shuffled order
                     for (int i = 0; i < intNOBMQ; i++) {  // Use intNOBMQ here
+						con.clear();
+						con.println(strLogInName + " score: " + intBTestscore);
                         con.println("Question: " + BM[i][0]);
                         con.print("Your answer: ");
                         String userAnswer = con.readLine();
@@ -199,6 +221,8 @@ public class CPTHamida {
 							
                     // Asking questions in the shuffled order
                     for (int i = 0; i < intNOALQ; i++) {  // Use intNOALQ here
+						con.clear();
+						con.println(strLogInName + " score: " + intATestscore);
                         con.println("Question: " + AL[i][0]);
                         con.print("Your answer: ");
                         String userAnswer = con.readLine();
@@ -279,6 +303,8 @@ public class CPTHamida {
 
                     // Asking questions in the shuffled order
                     for (int i = 0; i < intNOFLQ; i++) {  // Use intNOFLQ here
+						con.clear();
+						con.println(strLogInName + " score: " + intFTestscore);
                         con.println("Question: " + FL[i][0]);
                         con.print("Your answer: ");
                         String userAnswer = con.readLine();

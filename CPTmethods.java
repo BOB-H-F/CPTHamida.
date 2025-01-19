@@ -73,9 +73,10 @@ public class CPTmethods {
             // If the current name matches the logged-in user, add "(you)"
             if (names[i].equalsIgnoreCase(loggedInUser)) {
                 displayName += " (you)";
+                
             }
             // Print the ranking number, name, and score
-            con.println((i + 1) + ". " + displayName + " - " + scores[i]);
+            con.println("top "+(i + 1) + ". " + displayName + " with: " + scores[i]);
         }
     }
 }
